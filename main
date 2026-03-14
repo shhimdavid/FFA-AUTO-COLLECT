@@ -238,7 +238,6 @@ closeBtn.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
--- Logic
 local t = 0
 connection = RunService.RenderStepped:Connect(function(dt)
     local character = Player.Character
@@ -254,8 +253,17 @@ connection = RunService.RenderStepped:Connect(function(dt)
             if (autoAmmo and obj:FindFirstChild("Ammo")) or
                (autoHealth and obj:FindFirstChild("Health")) then
                 obj.Anchored = true
-                obj.Transparency = 1
                 obj.CFrame = CFrame.new(hrp.Position + Vector3.new(0, bounce, 0))
+                -- make invisible
+                obj.Transparency = 1
+                for _, child in pairs(obj:GetDescendants()) do
+                    if child:IsA("BasePart") or child:IsA("UnionOperation") or child:IsA("MeshPart") or child:IsA("SpecialMesh") then
+                        pcall(function() child.Transparency = 1 end)
+                    end
+                    if child:IsA("BillboardGui") or child:IsA("SurfaceGui") or child:IsA("ParticleEmitter") or child:IsA("SelectionBox") then
+                        pcall(function() child.Enabled = false end)
+                    end
+                end
             end
         end
     end
