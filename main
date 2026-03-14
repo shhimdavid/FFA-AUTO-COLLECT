@@ -12,8 +12,8 @@ if game.CreatorId ~= 3461453 then
 end
 
 -- Settings
-local autoHealth = false
-local autoAmmo = false
+local autoHealth = true
+local autoAmmo = true
 local minimized = false
 local connection
 
@@ -207,8 +207,8 @@ local function createToggle(name, default, callback)
     end)
 end
 
-createToggle("Auto Health", false, function(val) autoHealth = val end)
-createToggle("Auto Ammo", false, function(val) autoAmmo = val end)
+createToggle("Auto Health", true, function(val) autoHealth = val end)
+createToggle("Auto Ammo", true, function(val) autoAmmo = val end)
 updateSize()
 
 minBtn.MouseButton1Click:Connect(function()
