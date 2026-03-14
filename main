@@ -226,17 +226,22 @@ closeBtn.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
 
+-- Main Loop
 connection = RunService.RenderStepped:Connect(function()
     local character = Player.Character
     if not character then return end
     local hrp = character:FindFirstChild("HumanoidRootPart")
     if not hrp then return end
 
+    -- sine wave offset so drops bounce up and down constantly
+    local t = tick()
+    local bounce = math.sin(t * 10) * 2.5
+
     for _, obj in workspace:GetChildren() do
         if obj.Name == "_drop" and obj:IsA("BasePart") then
             if (autoAmmo and obj:FindFirstChild("Ammo")) or
                (autoHealth and obj:FindFirstChild("Health")) then
-                obj.CFrame = CFrame.new(hrp.Position)
+                obj.CFrame = CFrame.new(hrp.Position + Vector3.new(0, bounce, 0))
             end
         end
     end
