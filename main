@@ -12,8 +12,8 @@ if game.CreatorId ~= 3461453 then
 end
 
 -- Settings
-local autoHealth = true
-local autoAmmo = true
+local autoHealth = false
+local autoAmmo = false
 local minimized = false
 local connection
 
